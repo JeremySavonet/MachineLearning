@@ -37,13 +37,16 @@ grad = zeros(size(theta));
 %
 
 
+H = sigmoid( X * theta );
 
+% Compute cost
+J = 1/m * sum( -y.*log(H) - (1-y).*log(1-H) ) + (lambda/(2*m))*dot(theta(2:end),theta(2:end));
 
+% Compute gradient 
+grad1 = 1/m *( H - y )' * X(:,1);
+grad2 = ((1/m *( H - y )' * X(:,2:end))' + (lambda/m)*theta(2:end))';
 
-
-
-
-
+grad = [ grad1 grad2 ]';
 
 % =============================================================
 
